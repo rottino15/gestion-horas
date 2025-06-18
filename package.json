@@ -1,0 +1,19 @@
+{
+  "name": "gestion-horas",
+  "version": "1.0.0",
+  "description": "Sistema de registro de horas",
+  "main": "backend/index.js",
+  "scripts": {
+    "start": "node backend/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "cors": "^2.8.5"
+  }
+}
