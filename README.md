@@ -34,3 +34,13 @@ El backend escuchará en el puerto `3001` y el frontend en el `5173` por defecto
 backend/    Código del servidor Express y la base de datos
 frontend/   Aplicación React (Vite)
 ```
+<<<<<<< HEAD
+=======
+
+## Uso
+
+Al abrir la aplicación se muestra un selector de fecha desde el cual se puede
+elegir el día que se quiere gestionar. Para cada día se pueden añadir varias
+entradas indicando la hora de inicio y de fin. La aplicación también calcula y
+muestra el total de horas trabajadas en el mes seleccionado.
+>>>>>>> 27qwgj-codex/crear-sistema-de-registro-de-horas

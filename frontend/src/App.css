@@ -26,6 +26,21 @@ form {
   margin-bottom: 20px;
 }
 
+<<<<<<< HEAD
+=======
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.summary {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+>>>>>>> 27qwgj-codex/crear-sistema-de-registro-de-horas
 input {
   padding: 8px;
   border: 1px solid #ccc;
