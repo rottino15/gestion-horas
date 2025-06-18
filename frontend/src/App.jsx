@@ -2,18 +2,36 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
+  const today = new Date().toISOString().slice(0, 10);
+  const [selectedDay, setSelectedDay] = useState(today);
+  const [monthEntries, setMonthEntries] = useState([]);
   const [entries, setEntries] = useState([]);
-  const [form, setForm] = useState({ description: '', start_time: '', end_time: '' });
+  const [totalHours, setTotalHours] = useState(0);
+  const [form, setForm] = useState({ day: today, description: '', start_time: '', end_time: '' });
 
-  const fetchHours = async () => {
-    const res = await fetch('http://localhost:3001/api/hours');
+  const fetchMonth = async (month) => {
+    const res = await fetch(`http://localhost:3001/api/hours?month=${month}`);
     const data = await res.json();
-    setEntries(data);
+    setMonthEntries(data);
   };
 
   useEffect(() => {
-    fetchHours();
-  }, []);
+    const month = selectedDay.slice(0, 7);
+    fetchMonth(month);
+  }, [selectedDay]);
+
+  useEffect(() => {
+    setForm((f) => ({ ...f, day: selectedDay }));
+    const dayEntries = monthEntries.filter((e) => e.day === selectedDay);
+    setEntries(dayEntries);
+    let total = 0;
+    monthEntries.forEach((e) => {
+      const start = new Date(`1970-01-01T${e.start_time}:00Z`);
+      const end = new Date(`1970-01-01T${e.end_time}:00Z`);
+      total += end - start;
+    });
+    setTotalHours(total / 1000 / 60 / 60);
+  }, [monthEntries, selectedDay]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -26,11 +44,28 @@ function App() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
     });
-    setForm({ description: '', start_time: '', end_time: '' });
-    fetchHours();
+    setForm({ ...form, description: '', start_time: '', end_time: '' });
+    const month = selectedDay.slice(0, 7);
+    fetchMonth(month);
   };
 
   return (
+
+      <div className="controls">
+        <label>
+          Día:
+          <input
+            type="date"
+            value={selectedDay}
+            onChange={(e) => setSelectedDay(e.target.value)}
+          />
+        </label>
+        <div className="summary">Horas en el mes: {totalHours.toFixed(2)}</div>
+      </div>
+
+          type="time"
+          type="time"
+
 
     <div className="container">
       <h1>Gestión de Horas</h1>
