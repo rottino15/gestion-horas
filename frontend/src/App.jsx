@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './App.css';
 
 function App() {
   const [entries, setEntries] = useState([]);
@@ -30,19 +31,48 @@ function App() {
   };
 
   return (
-    <div>
+
+    <div className="container">
       <h1>Gestión de Horas</h1>
       <form onSubmit={handleSubmit}>
-        <input name="description" value={form.description} onChange={handleChange} placeholder="Descripción" />
-        <input name="start_time" value={form.start_time} onChange={handleChange} placeholder="Inicio" />
-        <input name="end_time" value={form.end_time} onChange={handleChange} placeholder="Fin" />
+        <input
+          name="description"
+          value={form.description}
+          onChange={handleChange}
+          placeholder="Descripción"
+        />
+        <input
+          name="start_time"
+          value={form.start_time}
+          onChange={handleChange}
+          placeholder="Inicio"
+        />
+        <input
+          name="end_time"
+          value={form.end_time}
+          onChange={handleChange}
+          placeholder="Fin"
+        />
         <button type="submit">Agregar</button>
       </form>
-      <ul>
-        {entries.map((e) => (
-          <li key={e.id}>{`${e.description} | ${e.start_time} - ${e.end_time}`}</li>
-        ))}
-      </ul>
+      <table>
+        <thead>
+          <tr>
+            <th>Descripción</th>
+            <th>Inicio</th>
+            <th>Fin</th>
+          </tr>
+        </thead>
+        <tbody>
+          {entries.map((e) => (
+            <tr key={e.id}>
+              <td>{e.description}</td>
+              <td>{e.start_time}</td>
+              <td>{e.end_time}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
